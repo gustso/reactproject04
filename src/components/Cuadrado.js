@@ -1,8 +1,8 @@
 import Button from 'react-bootstrap/Button';
 
-function Cuadrado () {
+function Cuadrado (props) {
     return (
-        <Button variant="outline-secondary">Light</Button>        
+        <Button variant="outline-secondary" >{props.valor}</Button>        
     );
 }
 export default Cuadrado;
