@@ -15,28 +15,42 @@ function Tablero() {
 
     const [valor, setValor] = useState("_");
     const [valoresCuadrados, setValoresCuadrados] = useState(Array(9).fill("_"));
+    const [siguienteX, setSiguienteX] = useState(true);
 
-    const cambiarValor = () => {        
+    const cambiarValor = (i) => {        
         setValor("X");
-        console.log("clic");
+        console.log("clic "+i);
+        if (siguienteX) {
+            setSiguienteX(false);
+            setValoresCuadrados([
+                ...valoresCuadrados.slice(0,i),
+                "X",
+                ...valoresCuadrados.slice(i+1, valoresCuadrados.length)])
+        } else {
+            setSiguienteX(true);
+            setValoresCuadrados([
+                ...valoresCuadrados.slice(0,i),
+                "O",
+                ...valoresCuadrados.slice(i+1, valoresCuadrados.length)])
+        }
     };
 
     return(<>        
        
         <Row xs="auto">            
-        <Cuadrado manejarClick={cambiarValor} valor={valor}/>
-        <Cuadrado valor={valoresCuadrados[1]}/>
-        <Cuadrado valor={valoresCuadrados[2]}/>
+        <Cuadrado manejarClick={(i) => cambiarValor(0)} valor={valoresCuadrados[0]}/>
+        <Cuadrado manejarClick={(i) => cambiarValor(1)} valor={valoresCuadrados[1]}/>
+        <Cuadrado manejarClick={(i) => cambiarValor(2)} valor={valoresCuadrados[2]}/>
         </Row>
         <Row xs="auto">
-        <Cuadrado valor={valoresCuadrados[3]}/>
-        <Cuadrado valor={valoresCuadrados[4]}/>
-        <Cuadrado valor={valoresCuadrados[5]}/>
+        <Cuadrado manejarClick={(i) => cambiarValor(3)} valor={valoresCuadrados[3]}/>
+        <Cuadrado manejarClick={(i) => cambiarValor(4)} valor={valoresCuadrados[4]}/>
+        <Cuadrado manejarClick={(i) => cambiarValor(5)} valor={valoresCuadrados[5]}/>
         </Row>
         <Row xs="auto">
-        <Cuadrado valor={valoresCuadrados[6]}/>
-        <Cuadrado valor={valoresCuadrados[7]}/>
-        <Cuadrado valor={valoresCuadrados[8]}/>
+        <Cuadrado manejarClick={(i) => cambiarValor(6)} valor={valoresCuadrados[6]}/>
+        <Cuadrado manejarClick={(i) => cambiarValor(7)}valor={valoresCuadrados[7]}/>
+        <Cuadrado manejarClick={(i) => cambiarValor(8)} valor={valoresCuadrados[8]}/>
         </Row>
     </>)
     
