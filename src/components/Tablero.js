@@ -1,5 +1,6 @@
 import Cuadrado from './Cuadrado';
 import { Container, Row } from 'react-bootstrap';
+import { useState } from "react";
 
 /**
 import React from "react";
@@ -11,21 +12,31 @@ renderCuadrado(i) {
  */
 
 function Tablero() {
-    return(<>    
-        <Row xs="auto">
-            <Cuadrado valor="1"/>
-            <Cuadrado valor="2"/>
-            <Cuadrado valor="3"/>
+
+    const [valor, setValor] = useState("_");
+    const [valoresCuadrados, setValoresCuadrados] = useState(Array(9).fill("_"));
+
+    const cambiarValor = () => {        
+        setValor("X");
+        console.log("clic");
+    };
+
+    return(<>        
+       
+        <Row xs="auto">            
+        <Cuadrado manejarClick={cambiarValor} valor={valor}/>
+        <Cuadrado valor={valoresCuadrados[1]}/>
+        <Cuadrado valor={valoresCuadrados[2]}/>
         </Row>
         <Row xs="auto">
-            <Cuadrado valor="4"/>
-            <Cuadrado valor="5"/>
-            <Cuadrado valor="6"/>
+        <Cuadrado valor={valoresCuadrados[3]}/>
+        <Cuadrado valor={valoresCuadrados[4]}/>
+        <Cuadrado valor={valoresCuadrados[5]}/>
         </Row>
         <Row xs="auto">
-            <Cuadrado valor="7"/>
-            <Cuadrado valor="8"/>
-            <Cuadrado valor="9"/>
+        <Cuadrado valor={valoresCuadrados[6]}/>
+        <Cuadrado valor={valoresCuadrados[7]}/>
+        <Cuadrado valor={valoresCuadrados[8]}/>
         </Row>
     </>)
     
