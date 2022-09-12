@@ -12,22 +12,24 @@ renderCuadrado(i) {
  */
 
 function Tablero() {
-
-    const [valor, setValor] = useState("_");
+    
     const [valoresCuadrados, setValoresCuadrados] = useState(Array(9).fill("_"));
     const [siguienteX, setSiguienteX] = useState(true);
+    const [valor, setValor] = useState("X");
 
     const cambiarValor = (i) => {        
         setValor("X");
         console.log("clic "+i);
         if (siguienteX) {
             setSiguienteX(false);
+            setValor("O");
             setValoresCuadrados([
                 ...valoresCuadrados.slice(0,i),
                 "X",
                 ...valoresCuadrados.slice(i+1, valoresCuadrados.length)])
         } else {
             setSiguienteX(true);
+            setValor("X");
             setValoresCuadrados([
                 ...valoresCuadrados.slice(0,i),
                 "O",
@@ -36,7 +38,7 @@ function Tablero() {
     };
 
     return(<>        
-       
+       <h1 className="display-1">Hola! Juega: {valor} </h1>        
         <Row xs="auto">            
         <Cuadrado manejarClick={(i) => cambiarValor(0)} valor={valoresCuadrados[0]}/>
         <Cuadrado manejarClick={(i) => cambiarValor(1)} valor={valoresCuadrados[1]}/>
@@ -49,7 +51,7 @@ function Tablero() {
         </Row>
         <Row xs="auto">
         <Cuadrado manejarClick={(i) => cambiarValor(6)} valor={valoresCuadrados[6]}/>
-        <Cuadrado manejarClick={(i) => cambiarValor(7)}valor={valoresCuadrados[7]}/>
+        <Cuadrado manejarClick={(i) => cambiarValor(7)} valor={valoresCuadrados[7]}/>
         <Cuadrado manejarClick={(i) => cambiarValor(8)} valor={valoresCuadrados[8]}/>
         </Row>
     </>)
